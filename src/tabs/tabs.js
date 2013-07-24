@@ -56,6 +56,7 @@ function TabsetCtrl($scope, $element) {
  * Tabset is the outer container for the tabs directive
  *
  * @param {boolean=} vertical Whether or not to use vertical styling for the tabs.
+ * @param {string=} type Navigation type. Possible values are 'tabs' and 'pills'.
  *
  * @example
 <example module="ui.bootstrap">
@@ -77,12 +78,15 @@ function TabsetCtrl($scope, $element) {
     restrict: 'EA',
     transclude: true,
     replace: true,
-    scope: {},
+    scope: {
+      vertical: '=',
+      type: '='
+    },
     controller: 'TabsetController',
     templateUrl: 'template/tabs/tabset.html',
     link: function(scope, element, attrs) {
-      scope.vertical = angular.isDefined(attrs.vertical) ? scope.$eval(attrs.vertical) : false;
-      scope.type = angular.isDefined(attrs.type) ? scope.$parent.$eval(attrs.type) : 'tabs';
+      scope.vertical = scope.vertical || false;
+      scope.type = scope.type || 'tabs';
     }
   };
 })
